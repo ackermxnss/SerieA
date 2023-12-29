@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risultato Della Giornata</title>
+    <style>
+        body {
+            background-size: cover;
+            color: rgb(0, 0, 0);
+            font-family: 'ComicSans', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            padding: 20px;
+        }
+
+        div {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px;
+            max-width: 400px;
+            margin: auto;
+            animation: fadeIn 2s;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+.Salernitana { color: rgb(212, 42, 0);}
+.Juventus { color: rgb(255, 255, 255);} 
+.Inter { color: rgb(25, 0, 255);} 
+.Milan { color: rgb(124, 0, 0);} 
+.Napoli { color: rgb(2, 183, 255);} 
+.Roma { color: rgb(226, 72, 0);} 
+.Lazio { color: rgb(51, 153, 255);} 
+.Atalanta { color: rgb(0, 171, 250);} 
+.Fiorentina { color: rgb(76, 0, 130);}
+.Sampdoria { color: rgb(0, 0, 75);} 
+.Sassuolo { color: rgb(34, 139, 0);} 
+.Genoa { color: rgb(255, 0, 0);} 
+.Torino { color: rgb(128, 0, 0);} 
+.Udinese { color: rgb(255, 68, 0);}
+.Cagliari { color: rgb(165, 42, 42);} 
+.Empoli { color: rgb(0, 111, 214);} 
+.Venezia { color: rgb(0, 128, 128);} 
+.Spezia { color: rgb(34, 6, 1);} 
+.Bologna { color: rgb(92, 0, 0);} 
+.Verona { color: rgb(255, 230, 0);} 
+
+
+
+    </style>
+</head>
+<body>
+
+<h1>Risultato Della Giornata Di SerieA</h1>
+
+<div id="partitaContainer">
+    <p>Partita tra <strong id="squadraCasa"></strong> e <strong id="squadraTrasferta"></strong></p>
+    <p>Goal <span id="nomeSquadraCasa"></span>: <span id="goalCasa"></span></p>
+    <p>Goal <span id="nomeSquadraTrasferta"></span>: <span id="goalTrasferta"></span></p>
+    <button onclick="generaNuovaPartita()">Clicca Per Altri Risultati Della Giornata</button>
+</div>
+
+<script>
+    var squadreSerieA = [
+        { nome: "Salernitana", colore: "Salernitana" },
+        { nome: "Juventus", colore: "Juventus" },
+        { nome: "Inter", colore: "Inter" },
+        { nome: "Milan", colore: "Milan" },
+        { nome: "Napoli", colore: "Napoli" },
+        { nome: "Roma", colore: "Roma" },
+        { nome: "Lazio", colore: "Lazio" },
+        { nome: "Atalanta", colore: "Atalanta" },
+        { nome: "Fiorentina", colore: "Fiorentina" },
+        { nome: "Sampdoria", colore: "Sampdoria" },
+        { nome: "Sassuolo", colore: "Sassuolo" },
+        { nome: "Genoa", colore: "Genoa" },
+        { nome: "Torino", colore: "Torino" },
+        { nome: "Udinese", colore: "Udinese" },
+        { nome: "Cagliari", colore: "Cagliari" },
+        { nome: "Empoli", colore: "Empoli" },
+        { nome: "Venezia", colore: "Venezia" },
+        { nome: "Spezia", colore: "Spezia" },
+        { nome: "Bologna", colore: "Bologna" },
+        { nome: "Verona", colore: "Verona" }
+    ];
+
+    function generaRisultatoCasuale() {
+        return Math.floor(Math.random() * 5);
+    }
+
+    function generaNuovaPartita() {
+        var nuovaPartita = {
+            squadraCasa: squadreSerieA[Math.floor(Math.random() * squadreSerieA.length)],
+            squadraTrasferta: squadreSerieA[Math.floor(Math.random() * squadreSerieA.length)],
+            goalCasa: generaRisultatoCasuale(),
+            goalTrasferta: generaRisultatoCasuale()
+        };
+
+        document.getElementById("partitaContainer").style.opacity = 0;
+
+        setTimeout(function () {
+            var squadraCasaElement = document.getElementById("squadraCasa");
+            squadraCasaElement.innerText = nuovaPartita.squadraCasa.nome;
+            squadraCasaElement.className = nuovaPartita.squadraCasa.colore;
+            squadraCasaElement.style.border = "1px solid #000"; 
+            squadraCasaElement.style.opacity = 1; 
+
+            var squadraTrasfertaElement = document.getElementById("squadraTrasferta");
+            squadraTrasfertaElement.innerText = nuovaPartita.squadraTrasferta.nome;
+            squadraTrasfertaElement.className = nuovaPartita.squadraTrasferta.colore;
+            squadraTrasfertaElement.style.border = "1px solid #000"; 
+            squadraTrasfertaElement.style.opacity = 1; 
+
+            document.getElementById("goalCasa").innerText = nuovaPartita.goalCasa;
+            document.getElementById("goalTrasferta").innerText = nuovaPartita.goalTrasferta;
+
+          
+            document.getElementById("partitaContainer").style.opacity = 1;
+        }, 500); 
+    }
+
+    generaNuovaPartita();
+</script>
